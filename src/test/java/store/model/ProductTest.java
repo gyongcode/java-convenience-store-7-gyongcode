@@ -39,9 +39,11 @@ class ProductTest {
     void 상품_수량_차감_테스트() {
         Product product = new Product("콜라", 1000, 10, "null");
 
-        assertThat(product.deductQuantity(5)).isEqualTo(true);
-        assertThat(product.deductQuantity(6)).isEqualTo(false);
+        product.deductQuantity(5);
         assertThat(product.getQuantity()).isEqualTo(5);
+
+        assertThatThrownBy(() -> product.deductQuantity(6)).isInstanceOf(
+            IllegalArgumentException.class);
 
         assertThatThrownBy(() -> product.deductQuantity(Product.ZERO)).isInstanceOf(
             IllegalArgumentException.class);

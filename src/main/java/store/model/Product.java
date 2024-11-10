@@ -10,16 +10,12 @@ public class Product {
 
     public Product(String name, int price, int quantity, String promotion) {
         validateName(name);
-        validatePrice(price);
-        validateQuantity(quantity);
+        validateUpToZero(price);
+        validateUpToZero(quantity);
 
         this.name = name;
         this.price = price;
         this.quantity = quantity;
-        if (promotion.equals("null")) {
-            this.promotion = null;
-            return;
-        }
         this.promotion = promotion;
     }
 
@@ -39,14 +35,15 @@ public class Product {
         return promotion;
     }
 
-    public boolean deductQuantity(int count) {
-        validateQuantity(count);
+    public void deductQuantity(int BuyCount) {
+        validateUpToZero(BuyCount);
 
-        if (quantity >= count) {
-            quantity -= count;
-            return true;
+        if (quantity >= BuyCount) {
+            quantity -= BuyCount;
+            return;
         }
-        return false;
+
+        throw new IllegalArgumentException("[ERROR] 재고 수량을 초과하여 구매할 수 없습니다. 다시 입력해 주세요.");
     }
 
     private void validateName(String name) {
@@ -55,15 +52,9 @@ public class Product {
         }
     }
 
-    private void validatePrice(int price) {
-        if (price <= ZERO) {
-            throw new IllegalArgumentException("[ERROR] 상품의 가격을 잘못 입력하였습니다.");
-        }
-    }
-
-    private void validateQuantity(int quantity) {
-        if (quantity <= ZERO) {
-            throw new IllegalArgumentException("[ERROR] 상품의 수량을 잘못 입력하였습니다.");
+    private void validateUpToZero(int n) {
+        if (n <= ZERO) {
+            throw new IllegalArgumentException("[ERROR] 0보다 큰 수를 입력하세요");
         }
     }
 }
