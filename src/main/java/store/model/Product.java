@@ -1,6 +1,7 @@
 package store.model;
 
 public class Product {
+
     final static int ZERO = 0;
 
     private String name;
@@ -23,7 +24,7 @@ public class Product {
         return name;
     }
 
-    public int getPrice(){
+    public int getPrice() {
         return price;
     }
 
@@ -31,7 +32,7 @@ public class Product {
         return quantity;
     }
 
-    public String getPromotion(){
+    public String getPromotion() {
         return promotion;
     }
 

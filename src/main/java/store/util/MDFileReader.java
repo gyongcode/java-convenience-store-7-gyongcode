@@ -8,9 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MDFileReader {
+
     private final String FILEPATH;
 
-    public MDFileReader(String filePath){
+    public MDFileReader(String filePath) {
         validateFilePath(filePath);
         this.FILEPATH = filePath;
     }
@@ -20,7 +21,7 @@ public class MDFileReader {
         String line;
         List<String> lines = new ArrayList<>();
 
-        while((line = br.readLine()) != null){
+        while ((line = br.readLine()) != null) {
             lines.add(line);
         }
 
@@ -39,8 +40,8 @@ public class MDFileReader {
         }
     }
 
-    private void validateFilePath(String filePath){
-        if(filePath == null || filePath == ""){
+    private void validateFilePath(String filePath) {
+        if (filePath == null || filePath == "") {
             throw new IllegalArgumentException("[ERROR] 파일 경로를 제대로 입력해주세요");
         }
     }

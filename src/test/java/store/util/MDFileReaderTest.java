@@ -30,9 +30,9 @@ class MDFileReaderTest {
         assertThat(mdFileReader.getLines().size()).isEqualTo(16);
 
         MDFileReader notFoundFile = new MDFileReader("src/main/resources/notFound.md");
-        assertThatThrownBy(()-> notFoundFile.getLines()).isInstanceOf(FileNotFoundException.class);
+        assertThatThrownBy(() -> notFoundFile.getLines()).isInstanceOf(FileNotFoundException.class);
 
         MDFileReader EmptyFile = new MDFileReader("src/main/resources/EmptyFile.md");
-        assertThatThrownBy(()-> EmptyFile.getLines()).isInstanceOf(IOException.class);
+        assertThatThrownBy(() -> EmptyFile.getLines()).isInstanceOf(IOException.class);
     }
 }
