@@ -11,8 +11,8 @@ public class Product {
 
     public Product(String name, int price, int quantity, String promotion) {
         validateName(name);
-        validateUpToZero(price);
-        validateUpToZero(quantity);
+        validateNotNegative(price);
+        validateNotNegative(quantity);
 
         this.name = name;
         this.price = price;
@@ -36,8 +36,15 @@ public class Product {
         return promotion;
     }
 
+    public String toString() {
+        String string =  "- " + name + " " + price + "원 " + quantity + "개 ";
+        if(promotion.equals("null"))
+            return string;
+        return string += promotion;
+    }
+
     public void deductQuantity(int BuyCount) {
-        validateUpToZero(BuyCount);
+        validateNotNegative(BuyCount);
 
         if (quantity >= BuyCount) {
             quantity -= BuyCount;
@@ -53,9 +60,9 @@ public class Product {
         }
     }
 
-    private void validateUpToZero(int n) {
-        if (n <= ZERO) {
-            throw new IllegalArgumentException("[ERROR] 0보다 큰 수를 입력하세요");
+    private void validateNotNegative(int n) {
+        if (n < ZERO) {
+            throw new IllegalArgumentException("[ERROR] 0보다 크거나 같은 수를 입력하세요");
         }
     }
 }

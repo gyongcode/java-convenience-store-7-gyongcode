@@ -16,7 +16,7 @@ class ProductTest {
         assertThat(product.getName()).isEqualTo("콜라");
         assertThat(product.getPrice()).isEqualTo(1000);
         assertThat(product.getQuantity()).isEqualTo(10);
-        assertThat(product.getPromotion()).isEqualTo(null);
+        assertThat(product.getPromotion()).isEqualTo("null");
     }
 
     @DisplayName("Product 생성자 예외처리 테스트")
@@ -27,10 +27,10 @@ class ProductTest {
         assertThatThrownBy(() -> new Product(null, 1000, 10, "null")).isInstanceOf(
             IllegalArgumentException.class);
 
-        assertThatThrownBy(() -> new Product("콜라", Product.ZERO, 10, "null")).isInstanceOf(
+        assertThatThrownBy(() -> new Product("콜라", -1, 10, "null")).isInstanceOf(
             IllegalArgumentException.class);
 
-        assertThatThrownBy(() -> new Product("콜라", 1000, Product.ZERO, "null")).isInstanceOf(
+        assertThatThrownBy(() -> new Product("콜라", 1000, -1, "null")).isInstanceOf(
             IllegalArgumentException.class);
     }
 
@@ -45,7 +45,7 @@ class ProductTest {
         assertThatThrownBy(() -> product.deductQuantity(6)).isInstanceOf(
             IllegalArgumentException.class);
 
-        assertThatThrownBy(() -> product.deductQuantity(Product.ZERO)).isInstanceOf(
+        assertThatThrownBy(() -> product.deductQuantity(-1)).isInstanceOf(
             IllegalArgumentException.class);
     }
 
