@@ -1,15 +1,11 @@
-package store.model;
+package store.util;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import store.util.MDFileReader;
-import store.util.Saparator;
+import store.model.Product;
+import store.model.Promotion;
 
 public class InventoryManager {
 
@@ -17,6 +13,7 @@ public class InventoryManager {
 
     private MDFileReader mdFileReader;
     private List<Product> products;
+    private PromotionManager promotionManager = new PromotionManager();
 
     public InventoryManager() throws IOException {
         this.products = new ArrayList<>();
@@ -47,18 +44,24 @@ public class InventoryManager {
         return new Product(name, price, quantity, promotion);
     }
 
-    public void deductProduct(String name, int buyCount, String promotion) {
-        Product product = findProductByNameAndPromotion(name, promotion);
-        product.deductQuantity(buyCount);
-    }
 
-    public Product findProductByNameAndPromotion(String name, String promotion) {
-        for (Product product : products) {
-            if (product.getName().equals(name) && product.getPromotion().equals(promotion)) {
-                return product;
+    public List<Product> findProductsByName(String name) {
+        List<Product> products = new ArrayList<>();
+        for (Product product : this.products) {
+            if (product.getName().equals(name)) {
+                products.add(product);
             }
         }
 
-        throw new IllegalArgumentException("[ERROR] 존재하지 않는 상품입니다. 다시 입력해 주세요.");
+        validateProductsNull(products);
+
+        Collections.sort(products);
+        return products;
+    }
+
+    public void validateProductsNull(List<Product> products) {
+        if (products.isEmpty()) {
+            throw new IllegalArgumentException("[ERROR] 존재하지 않는 상품입니다. 다시 입력해 주세요.");
+        }
     }
 }
