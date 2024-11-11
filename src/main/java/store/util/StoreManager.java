@@ -87,6 +87,9 @@ public class StoreManager {
                     return;
                 }
             }
+
+            normalProduct.deductQuantity(buyCount-promotionProduct.getQuantity());
+            promotionProduct.deductQuantity(promotionProduct.getQuantity());
             amountInformation.addAmountWithoutDiscount(amountWithoutDiscount);
             receipt.addPromotionProdudct(
                 new Product(name, promotionCount * price, promotionCount, "null"));
