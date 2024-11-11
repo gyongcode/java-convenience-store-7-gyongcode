@@ -1,6 +1,6 @@
 package store.model;
 
-public class Product {
+public class Product implements Comparable<Product>{
 
     final static int ZERO = 0;
 
@@ -37,9 +37,16 @@ public class Product {
     }
 
     public String toString() {
-        String string =  "- " + name + " " + price + "원 " + quantity + "개 ";
-        if(promotion.equals("null"))
+        String string = "- " + name + " " + String.format("%,d", price) + "원 ";
+        if(quantity==0)
+            string += "재고 없음 ";
+
+        if(quantity>0)
+            string += quantity + "개 ";
+
+        if (promotion.equals("null")) {
             return string;
+        }
         return string += promotion;
     }
 
@@ -64,5 +71,14 @@ public class Product {
         if (n < ZERO) {
             throw new IllegalArgumentException("[ERROR] 0보다 크거나 같은 수를 입력하세요");
         }
+    }
+
+    @Override
+    public int compareTo(Product o) {
+        if(this.promotion.equals("null"))
+            return 1;
+        if(o.promotion.equals("null"))
+            return -1;
+        return 0;
     }
 }
