@@ -79,7 +79,7 @@ public class Controller {
                 return true;
             }
             return false;
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println(e);
         }
         return checkAgain();

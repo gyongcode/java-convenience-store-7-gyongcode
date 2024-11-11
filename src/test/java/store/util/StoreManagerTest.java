@@ -28,7 +28,7 @@ class StoreManagerTest {
 
         assertThat(buyPromotion.getName()).isEqualTo("사이다");
         assertThat(buyPromotion.getPrice()).isEqualTo(1000);
-        assertThat(buyPromotion.getPrice()).isEqualTo(1);
+        assertThat(buyPromotion.getQuantity()).isEqualTo(1);
     }
 
     @Test
