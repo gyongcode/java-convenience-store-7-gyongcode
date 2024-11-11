@@ -55,11 +55,33 @@ public class StoreManager {
         int quantity = promotionProduct.getQuantity();
 
         if (buyCount < quantity) {
-            if (buyCount % (buy + 1) != 0) {
+            if (buyCount % (buy + 1) == buy) {
                 if (inputView.readApplyPromotion(promotionProduct)) {
                     buyCount++;
                 }
             }
+
+            if (buyCount % (buy + 1) < buy) {
+                if (inputView.readNotApplyPromotion(promotionProduct.getName(),
+                    buyCount % (buy + 1))) {
+                    int promotionCount = buyCount / (buy + 1) * (buy + 1);
+                    int notPromotionCount = buyCount % (buy + 1);
+                    receipt.addBuyProdudct(new Product(name, buyCount * price, buyCount, "null"));
+                    receipt.addPromotionProdudct(new Product(name, promotionCount*price, promotionCount, "null"));
+                    amountInformation.addAmountWithoutDiscount(price*notPromotionCount);
+                    promotionProduct.deductQuantity(promotionCount);
+                    normalProduct.deductQuantity(notPromotionCount);
+                    return;
+                }
+                int promotionCount = buyCount / (buy + 1) * (buy + 1);
+                buyCount = promotionCount;
+                if(buyCount==0)
+                    return;
+                promotionProduct.deductQuantity(buyCount);
+                receipt.addBuyProdudct(new Product(name, buyCount * price, buyCount, "null"));
+                receipt.addPromotionProdudct(new Product(name, promotionCount*price, promotionCount, "null"));
+            }
+
             promotionProduct.deductQuantity(buyCount);
             int promotionCount = buyCount / (buy + 1);
 
@@ -84,16 +106,16 @@ public class StoreManager {
                     receipt.addPromotionProdudct(
                         new Product(name, promotionCount * price, promotionCount, "null"));
                     receipt.addBuyProdudct(new Product(name, buyCount * price, buyCount, "null"));
-                    if(buyCount<=promotionProduct.getQuantity()) {
+                    if (buyCount <= promotionProduct.getQuantity()) {
                         promotionProduct.deductQuantity(buyCount);
                         return;
                     }
-                    normalProduct.deductQuantity(buyCount-promotionProduct.getQuantity());
+                    normalProduct.deductQuantity(buyCount - promotionProduct.getQuantity());
                     promotionProduct.deductQuantity(promotionProduct.getQuantity());
                 }
             }
 
-            normalProduct.deductQuantity(buyCount-promotionProduct.getQuantity());
+            normalProduct.deductQuantity(buyCount - promotionProduct.getQuantity());
             promotionProduct.deductQuantity(promotionProduct.getQuantity());
             amountInformation.addAmountWithoutDiscount(amountWithoutDiscount);
             receipt.addPromotionProdudct(

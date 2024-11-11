@@ -56,8 +56,8 @@ public class AmountInformation {
         String string = "";
 
         string += "총구매액\t\t" + totalCount + "\t" + String.format("%,d", totalPurchaseAmount) + "\n";
-        string += "행사할인\t\t\t" + String.format("%,d", -totalPromotionDiscount) + "\n";
-        string += "멤버십할인\t\t\t" + String.format("%,d", -membershipDiscount) + "\n";
+        string += "행사할인\t\t\t-" + String.format("%,d", totalPromotionDiscount) + "\n";
+        string += "멤버십할인\t\t\t-" + String.format("%,d", membershipDiscount) + "\n";
         string += "내실돈\t\t\t" + String.format("%,d", finalAmount);
 
         return string;
