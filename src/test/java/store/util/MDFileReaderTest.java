@@ -27,7 +27,7 @@ class MDFileReaderTest {
     @Test
     void getLines_테스트() throws IOException {
         MDFileReader mdFileReader = new MDFileReader("src/main/resources/products.md");
-        assertThat(mdFileReader.getLines().size()).isEqualTo(16);
+        assertThat(mdFileReader.getLines().size()).isEqualTo(18);
 
         MDFileReader notFoundFile = new MDFileReader("src/main/resources/notFound.md");
         assertThatThrownBy(() -> notFoundFile.getLines()).isInstanceOf(FileNotFoundException.class);
