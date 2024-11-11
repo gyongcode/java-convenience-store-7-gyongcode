@@ -61,7 +61,7 @@ public class StoreManager {
                 }
             }
 
-            if (buyCount % (buy + 1) < buy) {
+            if (buyCount % (buy + 1) < buy && buyCount % (buy + 1)>0) {
                 if (inputView.readNotApplyPromotion(promotionProduct.getName(),
                     buyCount % (buy + 1))) {
                     int promotionCount = buyCount / (buy + 1) * (buy + 1);
@@ -80,6 +80,7 @@ public class StoreManager {
                 promotionProduct.deductQuantity(buyCount);
                 receipt.addBuyProdudct(new Product(name, buyCount * price, buyCount, "null"));
                 receipt.addPromotionProdudct(new Product(name, promotionCount*price, promotionCount, "null"));
+                return;
             }
 
             promotionProduct.deductQuantity(buyCount);

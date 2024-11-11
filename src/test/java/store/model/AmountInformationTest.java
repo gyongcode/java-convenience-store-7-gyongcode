@@ -25,7 +25,7 @@ class AmountInformationTest {
         org.assertj.core.api.Assertions.assertThat(amountInformation.toString())
             .isEqualTo("총구매액\t\t6\t6,000\n"
                 + "행사할인\t\t\t-2,000\n"
-                + "멤버십할인\t\t\t0\n"
+                + "멤버십할인\t\t\t-0\n"
                 + "내실돈\t\t\t4,000");
     }
 }
