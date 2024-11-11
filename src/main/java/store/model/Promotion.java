@@ -37,7 +37,7 @@ public class Promotion {
 
     public boolean isPromotionVaild() {
         LocalDateTime now = DateTimes.now();
-        if (start_date.isBefore(now) && end_date.isBefore(now)) {
+        if (start_date.isBefore(now) && end_date.isAfter(now)) {
             return true;
         }
         return false;
