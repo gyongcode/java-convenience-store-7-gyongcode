@@ -16,7 +16,13 @@ public class InputView {
     public boolean readApplyPromotion(Product product) {
         System.out.println("현재 " + product.getName() + "은(는) 1개를 무료로 더 받을 수 있습니다. 추가하시겠습니까? (Y/N)");
         String input = Console.readLine();
-        validateYN(input);
+        try {
+            validateYN(input);
+
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            return readApplyPromotion(product);
+        }
         if (input.equals("Y")) {
             return true;
         }
@@ -27,8 +33,11 @@ public class InputView {
         System.out.println(
             "현재 " + name +" "+count+"개는 프로모션 할인이 적용되지 않습니다. 그래도 구매하시겠습니까? (Y/N)");
         String input = Console.readLine();
-        validateYN(input);
-
+        try {
+            validateYN(input);
+        }catch (IllegalArgumentException e){
+            return readNotApplyPromotion(name, count);
+        }
         if (input.equals("Y")) {
             return true;
         }
