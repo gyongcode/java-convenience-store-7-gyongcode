@@ -51,7 +51,7 @@ public class Controller {
 
             }
         } catch (IllegalArgumentException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
             getBuyProducts();
         }
     }
@@ -62,7 +62,7 @@ public class Controller {
                 storeManager.setMembershipDiscount();
             }
         } catch (IllegalArgumentException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
             checkMembership();
         }
     }
@@ -80,7 +80,7 @@ public class Controller {
             }
             return false;
         } catch (IllegalArgumentException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
         return checkAgain();
     }
